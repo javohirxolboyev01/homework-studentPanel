@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaUserGraduate,
@@ -11,16 +11,18 @@ import {
 import { FiSearch } from "react-icons/fi";
 
 const Dashboard = () => {
+  const nav = useNavigate();
   return (
     <div className="flex h-screen overflow-hidden">
       <aside className="w-64 h-screen bg-[#F0F9F4] text-gray-800 flex flex-col p-6 shadow-md">
         <div className="flex items-center justify-start mb-8 pl-2">
           <img
+            onClick={() => nav("")}
             src="https://www.greyb.com/wp-content/uploads/2023/01/logo_of_chonnam_national_university.svg_.png"
             alt="Logo"
             width={154}
             height={36}
-            className="object-contain"
+            className="object-contain select-none "
           />
         </div>
 
