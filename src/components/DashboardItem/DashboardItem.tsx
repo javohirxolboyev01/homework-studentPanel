@@ -14,12 +14,7 @@ const DashboardItem = () => {
             실시간으로 학생 활동을 추적하세요
           </p>
         </div>
-        {/* <button className="flex items-center bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-          <AiOutlinePlus className="mr-2" />
-          학생 추가
-        </button> */}
       </div>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <Card title="총 학생 수" count="1,250" growth="↑ 8%" positive />
         <Card title="총 강의 수" count="320" growth="↓ 2%" />
