@@ -125,9 +125,13 @@ const StudentForm = () => {
         <div className="md:col-span-2 flex justify-end">
           <button
             type="submit"
-            className="bg-[#46987a] text-white px-6 py-2 rounded-md hover:bg-[#3d866c] transition duration-200"
+            className={`text-white px-6 py-2 rounded-md transition duration-200 ${
+              edit
+                ? "bg-yellow-600 hover:bg-yellow-700"
+                : "bg-[#46987a] hover:bg-[#3d866c]"
+            }`}
           >
-            {edit ? "Save" : "Creatge"}
+            {edit ? "Save" : "Create"}
           </button>
         </div>
       </form>
