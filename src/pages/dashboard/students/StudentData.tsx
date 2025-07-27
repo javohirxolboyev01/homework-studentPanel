@@ -1,17 +1,15 @@
-import React, { type Dispatch, type FC, type SetStateAction } from "react";
+import React, { type FC } from "react";
 import { useBlog } from "../../../api/hook/useBlog";
-interface Props {
-  setEdit: Dispatch<SetStateAction<any>>;
-}
-const StudentData: FC<Props> = ({ setEdit }) => {
+import { useDispatch } from "react-redux";
+import { setEditStudent } from "../../../redux/feature/studentSlice";
+
+const StudentData: FC = () => {
+  const dispatch = useDispatch();
   const { getBlog, deleteBlog } = useBlog();
   const { data } = getBlog();
-  console.log(data);
 
   const handleUpdate = (item: any) => {
-    console.log(item);
-
-    setEdit(item);
+    dispatch(setEditStudent(item));
   };
 
   return (
@@ -31,12 +29,10 @@ const StudentData: FC<Props> = ({ setEdit }) => {
               <th className="px-4 py-3 text-center">Actions</th>
             </tr>
           </thead>
-
           <tbody>
             {data?.map((item: any) => (
               <tr key={item.id} className="border-b hover:bg-gray-50">
                 <td className="px-6 py-4">{item.id}</td>
-
                 <td className="px-6 py-4">
                   <img
                     src={item.image}
@@ -44,13 +40,11 @@ const StudentData: FC<Props> = ({ setEdit }) => {
                     className="w-10 h-10 rounded-full object-cover border"
                   />
                 </td>
-
                 <td className="px-6 py-4">{item.fname}</td>
                 <td className="px-6 py-4">{item.lname}</td>
                 <td className="px-6 py-4">{item.phone_number}</td>
                 <td className="px-6 py-4">{item.birthdate}</td>
                 <td className="px-6 py-4">{item.address}</td>
-
                 <td className="px-6 py-4 flex justify-center gap-2">
                   <button
                     onClick={() => handleUpdate(item)}

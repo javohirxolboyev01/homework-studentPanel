@@ -1,39 +1,46 @@
 import React, { useEffect, useState, type FormEvent } from "react";
 import StudentData from "./StudentData";
 import { useBlog } from "../../../api/hook/useBlog";
+import { useSelector, useDispatch } from "react-redux";
+
+import { clearEditStudent } from "../../../redux/feature/studentSlice";
+import type { RootState } from "../../../redux";
 
 const StudentForm = () => {
   const { createBlog, updateBlog } = useBlog();
+  const dispatch = useDispatch();
+
+  const edit = useSelector((state: RootState) => state.student.editStudent);
 
   const [fname, setFname] = useState<string>("");
   const [lname, setLname] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [phone_number, setPhone] = useState<number | "">("");
   const [birthdate, setBirthdate] = useState<number | "">("");
-  const [edit, setEdit] = useState<any>(null);
-
   useEffect(() => {
     if (edit) {
-      setFname(edit.fname ?? "");
-      setLname(edit.lname ?? "");
-      setAddress(edit.address ?? "");
-      setPhone(edit.phone_number ?? "");
-      setBirthdate(edit.birthdate ?? "");
+      setFname(edit.fname);
+      setLname(edit.lname);
+      setAddress(edit.address);
+      setPhone(edit.phone_number ? Number(edit.phone_number) : "");
+      setBirthdate(edit.birthdate ? Number(edit.phone_number) : "");
     }
   }, [edit]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const blogItem = {
-      fname,
-      lname,
-      address,
+      fname: fname.trim(),
+      lname: lname.trim(),
+      address: address.trim(),
       phone: phone_number.toString(),
       birthdate: birthdate.toString(),
     };
+
     if (edit) {
       updateBlog.mutate({ body: blogItem, id: edit.id });
-      setEdit(null);
+      dispatch(clearEditStudent());
     } else {
       createBlog.mutate(blogItem);
     }
@@ -136,7 +143,7 @@ const StudentForm = () => {
         </div>
       </form>
 
-      <StudentData setEdit={setEdit} />
+      <StudentData />
     </div>
   );
 };

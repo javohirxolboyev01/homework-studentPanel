@@ -1,0 +1,34 @@
+import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+
+interface Student {
+  id: number;
+  fname: string;
+  lname: string;
+  address: string;
+  phone_number?: string;
+  birthdate?: string;
+}
+
+interface StudentState {
+  editStudent: Student | null;
+}
+
+const initialState: StudentState = {
+  editStudent: null,
+};
+
+export const studentSlice = createSlice({
+  name: "student",
+  initialState,
+  reducers: {
+    setEditStudent: (state, action: PayloadAction<Student>) => {
+      state.editStudent = action.payload;
+    },
+    clearEditStudent: (state) => {
+      state.editStudent = null;
+    },
+  },
+});
+
+export const { setEditStudent, clearEditStudent } = studentSlice.actions;
+export default studentSlice.reducer;
