@@ -10,14 +10,28 @@ const AddTeachers = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!firstname || !lasttname || !types || !addsess || !degree) {
+      alert("Qovunboy inputga malumot kiriting...!");
+      return;
+    }
+
     const newData = {
+      id: Date.now(),
       firstname,
       lasttname,
       types,
       addsess,
       degree,
     };
+
     setData([...data, newData]);
+
+    setFirstname("");
+    setLastname("");
+    setTypes("");
+    setAddres("");
+    setDegree("");
   };
 
   const handleDelete = (id: number) => {
