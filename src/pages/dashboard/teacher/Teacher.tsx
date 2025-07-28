@@ -1,9 +1,12 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
 
 const Teacher = () => {
   return (
     <div>
-      <h2>Teacher</h2>
+      <main className="flex-1 p-6 overflow-y-auto bg-[#F8FBFA]">
+        <Outlet />
+      </main>
     </div>
   );
 };

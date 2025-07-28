@@ -1,16 +1,20 @@
-import React from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaUserGraduate,
-  FaTable,
   FaBoxOpen,
   FaBookmark,
   FaShoppingCart,
+  FaChalkboardTeacher,
 } from "react-icons/fa";
 import { FiSearch } from "react-icons/fi";
+import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 
 const Dashboard = () => {
+  const location = useLocation();
+  const [isTeacherOpen, setIsTeacherOpen] = useState(false);
+  const isTeacherRoute = location.pathname.startsWith("/teacher");
   const nav = useNavigate();
   return (
     <div className="flex h-screen overflow-hidden">
@@ -56,19 +60,47 @@ const Dashboard = () => {
             Students
           </NavLink>
 
-          <NavLink
-            to="/teacher"
-            className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-2 rounded-md font-medium transition ${
-                isActive
-                  ? "bg-[#A0D9C4] "
+          <div>
+            <button
+              onClick={() => setIsTeacherOpen(!isTeacherOpen)}
+              className={`flex items-center justify-between w-full gap-3 px-4 py-2 rounded-md font-medium transition ${
+                isTeacherRoute
+                  ? "bg-[#A0D9C4]"
                   : "hover:bg-[#D2F1E5] hover:text-gray-900"
-              }`
-            }
-          >
-            <FaTable />
-            Teachers
-          </NavLink>
+              }`}
+            >
+              <span className="flex items-center gap-3">
+                <FaChalkboardTeacher />
+                Teachers
+              </span>
+              {isTeacherOpen ? <IoIosArrowDown /> : <IoIosArrowForward />}
+            </button>
+
+            {isTeacherOpen && (
+              <div className="ml-8 mt-2 flex flex-col gap-2">
+                <NavLink
+                  to="/teacher/all_teacher"
+                  className={({ isActive }) =>
+                    `px-2 py-1 rounded hover:bg-[#D2F1E5] transition ${
+                      isActive ? "text-[#16A085] font-semibold" : ""
+                    }`
+                  }
+                >
+                  All Teacher
+                </NavLink>
+                <NavLink
+                  to="/teacher/add_teacher"
+                  className={({ isActive }) =>
+                    `px-2 py-1 rounded hover:bg-[#D2F1E5] transition ${
+                      isActive ? "text-[#16A085] font-semibold" : ""
+                    }`
+                  }
+                >
+                  Add Teachers
+                </NavLink>
+              </div>
+            )}
+          </div>
 
           <NavLink
             to="/product"

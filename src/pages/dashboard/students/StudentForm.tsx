@@ -39,17 +39,30 @@ const StudentForm = () => {
     };
 
     if (edit) {
-      updateBlog.mutate({ body: blogItem, id: edit.id });
+      updateBlog.mutate(
+        { body: blogItem, id: edit.id },
+        {
+          onSuccess: () => {
+            setFname("");
+            setLname("");
+            setAddress("");
+            setPhone("");
+            setBirthdate("");
+          },
+        }
+      );
       dispatch(clearEditStudent());
     } else {
-      createBlog.mutate(blogItem);
+      createBlog.mutate(blogItem, {
+        onSuccess: () => {
+          setFname("");
+          setLname("");
+          setAddress("");
+          setPhone("");
+          setBirthdate("");
+        },
+      });
     }
-
-    setFname("");
-    setLname("");
-    setAddress("");
-    setPhone("");
-    setBirthdate("");
   };
 
   return (
