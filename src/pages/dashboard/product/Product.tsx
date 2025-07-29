@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const Product = () => {
+  useEffect(() => {
+    document.title = "Products | Student Panel";
+  }, []);
   return <div>Product</div>;
 };
 

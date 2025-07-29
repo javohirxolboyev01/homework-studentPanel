@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const ActiveTeacher = () => {
+  useEffect(() => {
+    document.title = "All teacher | Student Panel";
+  }, []);
   return (
     <div>
       <h3>All Teacher</h3>

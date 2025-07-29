@@ -10,6 +10,7 @@ const StudentData: FC = () => {
 
   const handleUpdate = (item: any) => {
     dispatch(setEditStudent(item));
+    window.scrollTo({ top: 0 });
   };
 
   return (

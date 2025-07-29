@@ -1,13 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { Student } from "../../types";
 
-interface Student {
-  id: number;
-  fname: string;
-  lname: string;
-  address: string;
-  phone_number?: string;
-  birthdate?: string;
-}
+
 
 interface StudentState {
   editStudent: Student | null;

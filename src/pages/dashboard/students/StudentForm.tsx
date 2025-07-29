@@ -34,7 +34,7 @@ const StudentForm = () => {
       fname: fname.trim(),
       lname: lname.trim(),
       address: address.trim(),
-      phone: phone_number.toString(),
+      phone_number: phone_number.toString(),
       birthdate: birthdate.toString(),
     };
 
