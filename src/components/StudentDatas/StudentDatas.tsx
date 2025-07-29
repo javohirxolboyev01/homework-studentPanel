@@ -1,16 +1,15 @@
-import React, { type Dispatch, type FC, type SetStateAction } from "react";
+import React from "react";
 import { useBlog } from "../../api/hook/useBlog";
-interface Props {
-  setEdit: Dispatch<SetStateAction<any>>;
-}
-const StudentDatas: FC<Props> = ({ setEdit }) => {
-  // const dispatch = useDispatch();
+import { useDispatch } from "react-redux";
+import { setEditStudent } from "../../redux/feature/studentSlice";
+
+const StudentDatas = () => {
+  const dispatch = useDispatch();
   const { getBlog, deleteBlog } = useBlog();
   const { data } = getBlog();
 
   const handleUpdate = (item: any) => {
-    setEdit(item);
-    //   dispatch(setEditStudent(item));
+    dispatch(setEditStudent(item));
     window.scrollTo({ top: 0 });
   };
 

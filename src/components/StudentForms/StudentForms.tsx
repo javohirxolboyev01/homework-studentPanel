@@ -1,19 +1,21 @@
 import React, { useEffect, useState, type FormEvent } from "react";
 import { useBlog } from "../../api/hook/useBlog";
 import StudentDatas from "../StudentDatas/StudentDatas";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../redux";
+import { clearEditStudent } from "../../redux/feature/studentSlice";
 
 const StudentForms = () => {
   const { createBlog, updateBlog } = useBlog();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const edit = useSelector((state: RootState) => state.student.editStudent);
+  const edit = useSelector((state: RootState) => state.student.editStudent);
 
   const [fname, setFname] = useState<string>("");
   const [lname, setLname] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [phone_number, setPhone] = useState<number | "">("");
   const [birthdate, setBirthdate] = useState<number | "">("");
-  const [edit, setEdit] = useState<any>(null);
   useEffect(() => {
     if (edit) {
       setFname(edit.fname);
@@ -48,8 +50,8 @@ const StudentForms = () => {
           },
         }
       );
-      setEdit(null);
-      // dispatch(clearEditStudent());
+
+      dispatch(clearEditStudent());
     } else {
       createBlog.mutate(blogItem, {
         onSuccess: () => {
@@ -153,7 +155,7 @@ const StudentForms = () => {
           </button>
         </div>
       </form>
-      <StudentDatas setEdit={setEdit} />
+      <StudentDatas/>
     </div>
   );
 };
